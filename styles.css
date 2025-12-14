@@ -1,0 +1,457 @@
+/* =========================
+       RESET BÁSICO
+    ========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button {
+    font: inherit;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* =========================
+       VARIABLES (CUSTOM PROPERTIES)
+    ========================== */
+:root {
+    --bg: #0b0f18;
+    --panel: rgba(255, 255, 255, .06);
+    --panel-2: rgba(255, 255, 255, .09);
+    --border: rgba(255, 255, 255, .12);
+    --text: rgba(255, 255, 255, .92);
+    --muted: rgba(255, 255, 255, .72);
+    --muted-2: rgba(255, 255, 255, .55);
+
+    --ok: #22c55e;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+
+    --shadow: 0 14px 44px rgba(0, 0, 0, .45);
+    --radius: 18px;
+    --radius-sm: 14px;
+
+    --ring: 0 0 0 4px rgba(99, 102, 241, .28);
+
+    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    --maxw: 980px;
+}
+
+/* =========================
+       ESTILOS GENERALES / LAYOUT
+    ========================== */
+body {
+    min-height: 100dvh;
+    font-family: var(--font);
+    color: var(--text);
+    background:
+        radial-gradient(1000px 500px at 10% 10%, rgba(99, 102, 241, .25), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(34, 197, 94, .18), transparent 65%),
+        radial-gradient(900px 600px at 40% 90%, rgba(245, 158, 11, .14), transparent 60%),
+        var(--bg);
+    display: grid;
+    place-items: start center;
+    padding: 22px 14px 28px;
+}
+
+.app {
+    width: min(100%, var(--maxw));
+    display: grid;
+    gap: 14px;
+}
+
+header {
+    background: linear-gradient(180deg, var(--panel), transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.35rem, 1.2rem + 1vw, 2.05rem);
+    letter-spacing: .2px;
+}
+
+header p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.4;
+    max-width: 70ch;
+}
+
+main {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* =========================
+       FORMULARIO (AGREGAR TAREA)
+    ========================== */
+.composer {
+    display: grid;
+    gap: 10px;
+}
+
+.row {
+    display: grid;
+    gap: 10px;
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+}
+
+label {
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+.inputWrap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, .22);
+    color: var(--text);
+    outline: none;
+    transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, .42);
+}
+
+input[type="text"]:focus {
+    border-color: rgba(99, 102, 241, .6);
+    box-shadow: var(--ring);
+    background: rgba(0, 0, 0, .28);
+}
+
+.btn {
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, .12);
+}
+
+.btn:active {
+    transform: translateY(0px);
+    opacity: .9;
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+    border-color: rgba(99, 102, 241, .6);
+}
+
+.btnPrimary {
+    background: rgba(99, 102, 241, .22);
+    border-color: rgba(99, 102, 241, .45);
+}
+
+.btnPrimary:hover {
+    background: rgba(99, 102, 241, .28);
+}
+
+.hint {
+    color: var(--muted-2);
+    font-size: .9rem;
+    line-height: 1.35;
+}
+
+/* =========================
+       LISTA DE TAREAS
+    ========================== */
+.listHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.listHeader h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.counter {
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+.tasks {
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
+}
+
+.task {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, .18);
+    transition: transform .14s ease, border-color .14s ease, background .14s ease;
+    animation: popIn .18s ease-out;
+}
+
+.task:hover {
+    border-color: rgba(255, 255, 255, .18);
+    transform: translateY(-1px);
+    background: rgba(0, 0, 0, .22);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(.995);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.task.removing {
+    animation: fadeOut .16s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+/* Checkbox accesible */
+.check {
+    display: grid;
+    place-items: center;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ok);
+    cursor: pointer;
+}
+
+input[type="checkbox"]:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+    border-radius: 6px;
+}
+
+.taskText {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.taskTitle {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.25;
+    word-break: break-word;
+}
+
+.meta {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--muted-2);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.iconBtn {
+    padding: 10px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .06);
+    cursor: pointer;
+    transition: transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+}
+
+.iconBtn:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, .10);
+}
+
+.iconBtn:active {
+    transform: translateY(0);
+    opacity: .9;
+}
+
+.iconBtn:focus-visible {
+    outline: none;
+    box-shadow: var(--ring);
+    border-color: rgba(99, 102, 241, .6);
+}
+
+.danger {
+    border-color: rgba(239, 68, 68, .35);
+}
+
+.danger:hover {
+    background: rgba(239, 68, 68, .12);
+}
+
+.warn {
+    border-color: rgba(245, 158, 11, .35);
+}
+
+.warn:hover {
+    background: rgba(245, 158, 11, .12);
+}
+
+.completed {
+    opacity: .86;
+    background: rgba(34, 197, 94, .08);
+    border-color: rgba(34, 197, 94, .24);
+}
+
+.completed .taskTitle {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, .68);
+}
+
+/* Edición inline */
+.editInput {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(99, 102, 241, .55);
+    background: rgba(0, 0, 0, .28);
+    color: var(--text);
+    outline: none;
+}
+
+.editInput:focus {
+    box-shadow: var(--ring);
+}
+
+.emptyState {
+    padding: 18px 12px;
+    border: 1px dashed rgba(255, 255, 255, .18);
+    border-radius: var(--radius-sm);
+    color: var(--muted);
+    line-height: 1.35;
+    background: rgba(0, 0, 0, .10);
+}
+
+/* =========================
+       FOOTER
+    ========================== */
+footer {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, .05);
+    color: var(--muted);
+    display: grid;
+    gap: 8px;
+}
+
+footer small {
+    color: var(--muted-2);
+    line-height: 1.35;
+}
+
+.kbd {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, .2);
+    color: rgba(255, 255, 255, .78);
+    font-size: .88em;
+    vertical-align: baseline;
+    margin: 0 2px;
+}
+
+/* =========================
+       RESPONSIVE (MOBILE-FIRST)
+    ========================== */
+@media (min-width: 720px) {
+    main {
+        padding: 16px;
+    }
+
+    .composer {
+        gap: 12px;
+    }
+
+    .inputWrap {
+        grid-template-columns: 1fr auto auto;
+    }
+
+    .btn {
+        padding: 12px 16px;
+    }
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

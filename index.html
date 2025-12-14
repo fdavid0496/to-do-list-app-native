@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- =========================
+       META / SEO BÁSICO
+  ========================== -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="To-Do List nativa con edición, eliminación, completado y persistencia en localStorage." />
+    <title>To-Do List | Nativa</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- =========================
+       SECCIÓN HTML (SEMÁNTICA)
+  ========================== -->
+    <div class="app">
+        <header>
+            <h1>To-Do List</h1>
+            <p>Agrega, edita, completa y elimina tareas. Tus datos se guardan automáticamente en este navegador.</p>
+        </header>
+
+        <main>
+            <!-- Formulario para agregar tareas -->
+            <section class="composer" aria-labelledby="composer-title">
+                <h2 id="composer-title" class="sr-only"
+                    style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+                    Agregar tarea
+                </h2>
+
+                <form id="taskForm" class="row" autocomplete="off">
+                    <div class="field">
+                        <label for="taskInput">Nueva tarea</label>
+                        <div class="inputWrap">
+                            <input id="taskInput" name="task" type="text" inputmode="text"
+                                placeholder="Ej: Llamar al cliente, estudiar 30 min…"
+                                aria-describedby="formHint formError" aria-label="Escribe una nueva tarea" required />
+                            <button class="btn btnPrimary" type="submit" id="addBtn" aria-label="Agregar tarea">
+                                Agregar
+                            </button>
+                            <button class="btn" type="button" id="clearCompletedBtn"
+                                aria-label="Eliminar tareas completadas">
+                                Limpiar completadas
+                            </button>
+                        </div>
+                        <div id="formHint" class="hint">
+                            Tip: <span class="kbd">Enter</span> para agregar · Doble clic en el texto para editar ·
+                            <span class="kbd">Esc</span> para cancelar edición.
+                        </div>
+                        <div id="formError" class="hint" role="status" aria-live="polite"></div>
+                    </div>
+                </form>
+
+                <!-- Encabezado lista + contador -->
+                <div class="listHeader">
+                    <h2>Tareas</h2>
+                    <div class="counter" aria-live="polite" role="status" id="counter">
+                        0 pendientes · 0 completadas
+                    </div>
+                </div>
+
+                <!-- Lista de tareas renderizada dinámicamente -->
+                <section aria-label="Lista de tareas">
+                    <ul id="taskList" class="tasks" role="list"></ul>
+
+                    <div id="emptyState" class="emptyState" hidden>
+                        No hay tareas todavía. Escribe una y presiona <span class="kbd">Enter</span>.
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+            <div>
+                Accesibilidad: navega con <span class="kbd">Tab</span>, activa con <span class="kbd">Enter</span>/<span
+                    class="kbd">Espacio</span>.
+            </div>
+            <small>
+                Guardado automático: los cambios se persisten en <code>localStorage</code> en este navegador.
+            </small>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
